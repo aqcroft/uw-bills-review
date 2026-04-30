@@ -12,6 +12,8 @@ const accordionSections = document.querySelectorAll("[data-service-section]");
 const mobileSimCount = document.querySelector("#mobileSimCount");
 const simList = document.querySelector("#simList");
 const simTemplate = document.querySelector("#simTemplate");
+const economy7 = document.querySelector("#economy7");
+const economy7Details = document.querySelector("#economy7Details");
 
 function showMessage(message) {
   formMessage.textContent = message;
@@ -58,7 +60,7 @@ function setAccordionState(serviceName, shouldOpen, shouldScroll = false) {
 
   panel.hidden = !shouldOpen;
   trigger.setAttribute("aria-expanded", String(shouldOpen));
-  trigger.querySelector(".accordion-state").textContent = shouldOpen ? "Close" : "Open";
+  trigger.querySelector(".accordion-state").textContent = shouldOpen ? "Click to hide" : "Click to open";
 
   if (topButton) {
     topButton.classList.toggle("is-selected", shouldOpen);
@@ -135,8 +137,12 @@ function buildPayload() {
     reviewServices: getOpenServices(),
     energyProvider: getField(formData, "energyProvider"),
     energyMonthlyCost: getField(formData, "energyMonthlyCost"),
-    energyAnnualUsage: getField(formData, "energyAnnualUsage"),
     energyContract: getField(formData, "energyContract"),
+    energyElectricUsage: getField(formData, "energyElectricUsage"),
+    energyGasUsage: getField(formData, "energyGasUsage"),
+    economy7: formData.get("economy7") === "yes" ? "yes" : "no",
+    economy7DayUsage: getField(formData, "economy7DayUsage"),
+    economy7NightUsage: getField(formData, "economy7NightUsage"),
     energyFuel: getRadioValue(formData, "energyFuel"),
     energyFeatures: getSelectedValues(formData, "energyFeatures"),
     energyNotes: getField(formData, "energyNotes"),
@@ -144,7 +150,7 @@ function buildPayload() {
     broadbandMonthlyCost: getField(formData, "broadbandMonthlyCost"),
     broadbandSpeed: getField(formData, "broadbandSpeed"),
     broadbandBundle: getField(formData, "broadbandBundle"),
-    broadbandExtras: getSelectedValues(formData, "broadbandExtras"),
+    broadbandBoosters: getRadioValue(formData, "broadbandBoosters"),
     broadbandIssues: getField(formData, "broadbandIssues"),
     mobileSimCount: getField(formData, "mobileSimCount"),
     mobileMonthlyCost: getField(formData, "mobileMonthlyCost"),
@@ -216,6 +222,10 @@ accordionSections.forEach((section) => {
 
 mobileSimCount.addEventListener("input", buildSimRows);
 
+economy7.addEventListener("change", () => {
+  economy7Details.hidden = !economy7.checked;
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   clearMessage();
@@ -236,6 +246,7 @@ form.addEventListener("submit", async (event) => {
     successPanel.hidden = false;
     form.reset();
     simList.innerHTML = "";
+    economy7Details.hidden = true;
     accordionSections.forEach((section) => setAccordionState(section.dataset.serviceSection, false));
   } catch (error) {
     showMessage(error.message || "Something went wrong. Please try again.");

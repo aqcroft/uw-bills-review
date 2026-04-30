@@ -35,7 +35,7 @@ textarea {
 .page-shell {
   width: min(100%, 920px);
   margin: 0 auto;
-  padding: 18px 16px 42px;
+  padding: 16px 14px 36px;
 }
 
 .hero,
@@ -47,7 +47,7 @@ textarea {
 }
 
 .hero {
-  padding: 18px;
+  padding: 16px;
   box-shadow: 7px 7px 0 var(--pink);
 }
 
@@ -123,7 +123,7 @@ h2 {
 }
 
 h1 {
-  font-size: clamp(2.35rem, 12vw, 4.9rem);
+  font-size: clamp(2.25rem, 10vw, 4.6rem);
 }
 
 h2 {
@@ -142,7 +142,7 @@ h2 {
 .intro {
   max-width: 38rem;
   margin: 14px 0 0;
-  font-size: 1.02rem;
+  font-size: 1rem;
 }
 
 .reassurance-list {
@@ -157,10 +157,10 @@ h2 {
 .reassurance-list li {
   border: 2px solid var(--line);
   border-radius: 999px;
-  padding: 7px 11px;
+  padding: 6px 10px;
   background: #fff;
-  font-size: 0.88rem;
-  font-weight: 900;
+  font-size: 0.84rem;
+  font-weight: 700;
 }
 
 .review-card {
@@ -198,19 +198,20 @@ h2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
-  margin: 20px 0;
+  margin: 16px 0;
 }
 
 .service-strip button {
   display: grid;
   place-items: center;
-  gap: 7px;
-  min-height: 94px;
+  gap: 6px;
+  min-height: 76px;
   border: 2px solid var(--line);
   border-radius: 8px;
   background: var(--card);
   color: var(--ink);
-  font-weight: 800;
+  font-size: 0.96rem;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
 }
@@ -227,8 +228,8 @@ h2 {
 
 .service-strip img,
 .service-icon-text {
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
 }
 
 .service-icon-text {
@@ -242,7 +243,7 @@ h2 {
 
 .review-form {
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .accordion-section {
@@ -253,12 +254,12 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
-  min-height: 68px;
+  min-height: 58px;
   border: 0;
   border-radius: 0;
-  padding: 14px 18px;
+  padding: 10px 14px;
   background: var(--card);
   color: var(--ink);
   cursor: pointer;
@@ -270,18 +271,10 @@ h2 {
 }
 
 .accordion-state {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 64px;
-  min-height: 34px;
-  border: 2px solid var(--line);
-  border-radius: 999px;
-  padding: 0 12px;
-  background: var(--purple);
-  color: #fff;
+  color: var(--purple-dark);
   font-size: 0.86rem;
-  font-weight: 900;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .accordion-panel {
@@ -303,7 +296,7 @@ h2 {
 }
 
 .form-section {
-  padding: 18px;
+  padding: 14px;
 }
 
 .section-heading {
@@ -313,34 +306,49 @@ h2 {
   margin-bottom: 14px;
 }
 
-.section-heading.compact {
-  margin: 0;
-  font-size: 1.35rem;
-  font-weight: 900;
-}
-
-.section-heading > span {
+.section-heading > .step-number {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border: 2px solid var(--line);
   border-radius: 50%;
   background: var(--sun);
-  font-weight: 900;
-  flex: 0 0 34px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  flex: 0 0 30px;
+}
+
+.service-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.service-title img,
+.service-title .service-icon-text {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+}
+
+.service-icon-text.small {
+  font-size: 0.95rem;
 }
 
 .section-intro {
   margin: -4px 0 14px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 label,
 legend {
   display: block;
-  margin-bottom: 7px;
-  font-weight: 800;
+  margin-bottom: 6px;
+  font-weight: 650;
 }
 
 .required-mark {
@@ -372,11 +380,11 @@ input,
 select,
 textarea {
   width: 100%;
-  min-height: 46px;
-  margin-bottom: 14px;
+  min-height: 42px;
+  margin-bottom: 12px;
   border: 2px solid var(--line);
   border-radius: 6px;
-  padding: 11px 12px;
+  padding: 9px 11px;
   background: #fff;
 }
 
@@ -402,7 +410,7 @@ a:focus {
 .choice-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 8px;
+  gap: 7px;
 }
 
 .choice-row label,
@@ -416,9 +424,10 @@ a:focus {
   display: flex;
   align-items: center;
   gap: 8px;
-  min-height: 46px;
+  min-height: 42px;
   margin: 0;
-  padding: 0 12px;
+  padding: 0 10px;
+  font-weight: 600;
 }
 
 .choice-row input,
@@ -462,7 +471,7 @@ a:focus {
 .regulated-note,
 .consent-note {
   margin: 0 0 16px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .regulated-note {
@@ -473,8 +482,8 @@ a:focus {
 
 .sim-list {
   display: grid;
-  gap: 12px;
-  margin: 8px 0 16px;
+  gap: 10px;
+  margin: 6px 0 14px;
 }
 
 .sim-card {
@@ -486,8 +495,33 @@ a:focus {
 
 .sim-card summary {
   cursor: pointer;
-  padding: 12px 14px;
-  font-weight: 900;
+  padding: 10px 12px;
+  font-weight: 700;
+}
+
+.nested-panel {
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  margin: 0 0 14px;
+  padding: 12px 12px 0;
+  background: #fbf7ff;
+}
+
+.inline-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  padding: 0 10px;
+  background: #fff;
+}
+
+.inline-check input {
+  width: 18px;
+  min-height: 18px;
+  margin: 0;
 }
 
 .sim-card .field-grid,

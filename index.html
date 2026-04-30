@@ -77,7 +77,7 @@
 
         <section class="form-section" aria-labelledby="contact-heading">
           <div class="section-heading">
-            <span aria-hidden="true">1</span>
+            <span class="step-number" aria-hidden="true">1</span>
             <h2 id="contact-heading">Your details</h2>
           </div>
 
@@ -119,11 +119,11 @@
 
         <section class="accordion-section" data-service-section="energy">
           <button class="accordion-trigger" type="button" id="energyTrigger" aria-controls="energyPanel" aria-expanded="false">
-            <span class="section-heading compact">
-              <span aria-hidden="true">2</span>
+            <span class="service-title">
+              <img src="assets/energy-icon.svg" alt="" />
               <span>Energy</span>
             </span>
-            <span class="accordion-state">Open</span>
+            <span class="accordion-state">Click to open</span>
           </button>
           <div class="accordion-panel" id="energyPanel" role="region" aria-labelledby="energyTrigger" hidden>
             <div class="form-section panel-inner">
@@ -140,13 +140,39 @@
 
               <div class="field-grid">
                 <div>
-                  <label for="energyAnnualUsage">Estimated annual usage, if known</label>
-                  <input id="energyAnnualUsage" name="energyAnnualUsage" placeholder="e.g. 2,900 kWh electricity / 12,000 kWh gas" />
-                  <p class="field-hint">Often shown on a bill as estimated annual consumption or usage in kWh.</p>
-                </div>
-                <div>
                   <label for="energyContract">Contract or tariff name, if known</label>
                   <input id="energyContract" name="energyContract" placeholder="Fixed, variable, tariff name, not sure" />
+                </div>
+                <div>
+                  <label for="energyElectricUsage">Estimated annual electricity usage</label>
+                  <input id="energyElectricUsage" name="energyElectricUsage" placeholder="e.g. 2,900 kWh" />
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="energyGasUsage">Estimated annual gas usage</label>
+                  <input id="energyGasUsage" name="energyGasUsage" placeholder="e.g. 12,000 kWh or none" />
+                  <p class="field-hint">Usually shown on a bill as estimated annual consumption or usage in kWh.</p>
+                </div>
+                <div>
+                  <label class="inline-check">
+                    <input type="checkbox" id="economy7" name="economy7" value="yes" />
+                    Economy 7
+                  </label>
+                </div>
+              </div>
+
+              <div class="nested-panel" id="economy7Details" hidden>
+                <div class="field-grid">
+                  <div>
+                    <label for="economy7DayUsage">Day usage, if known</label>
+                    <input id="economy7DayUsage" name="economy7DayUsage" placeholder="e.g. 1,800 kWh" />
+                  </div>
+                  <div>
+                    <label for="economy7NightUsage">Night usage, if known</label>
+                    <input id="economy7NightUsage" name="economy7NightUsage" placeholder="e.g. 1,100 kWh" />
+                  </div>
                 </div>
               </div>
 
@@ -162,7 +188,6 @@
               <fieldset>
                 <legend>Anything else at home?</legend>
                 <div class="choice-row priorities">
-                  <label><input type="checkbox" name="energyFeatures" value="economy-7" /> Economy 7</label>
                   <label><input type="checkbox" name="energyFeatures" value="ev-charging" /> EV charging</label>
                   <label><input type="checkbox" name="energyFeatures" value="solar-panels" /> Solar panels</label>
                   <label><input type="checkbox" name="energyFeatures" value="battery-storage" /> Battery storage</label>
@@ -177,11 +202,11 @@
 
         <section class="accordion-section" data-service-section="broadband">
           <button class="accordion-trigger" type="button" id="broadbandTrigger" aria-controls="broadbandPanel" aria-expanded="false">
-            <span class="section-heading compact">
-              <span aria-hidden="true">3</span>
+            <span class="service-title">
+              <img src="assets/broadband-icon.svg" alt="" />
               <span>Broadband</span>
             </span>
-            <span class="accordion-state">Open</span>
+            <span class="accordion-state">Click to open</span>
           </button>
           <div class="accordion-panel" id="broadbandPanel" role="region" aria-labelledby="broadbandTrigger" hidden>
             <div class="form-section panel-inner">
@@ -208,12 +233,11 @@
               </div>
 
               <fieldset>
-                <legend>Do you use any Wi-Fi extras?</legend>
-                <div class="choice-row priorities">
-                  <label><input type="checkbox" name="broadbandExtras" value="boosters" /> Boosters / discs</label>
-                  <label><input type="checkbox" name="broadbandExtras" value="whole-home-wifi" /> Whole home Wi-Fi</label>
-                  <label><input type="checkbox" name="broadbandExtras" value="lots-of-devices" /> Lots of connected devices</label>
-                  <label><input type="checkbox" name="broadbandExtras" value="not-sure" /> Not sure</label>
+                <legend>Do you have any Wi-Fi boosters?</legend>
+                <div class="choice-row three">
+                  <label><input type="radio" name="broadbandBoosters" value="yes" /> Yes</label>
+                  <label><input type="radio" name="broadbandBoosters" value="no" /> No</label>
+                  <label><input type="radio" name="broadbandBoosters" value="not-sure" /> Not sure</label>
                 </div>
               </fieldset>
 
@@ -225,11 +249,11 @@
 
         <section class="accordion-section" data-service-section="mobile">
           <button class="accordion-trigger" type="button" id="mobileTrigger" aria-controls="mobilePanel" aria-expanded="false">
-            <span class="section-heading compact">
-              <span aria-hidden="true">4</span>
+            <span class="service-title">
+              <img src="assets/mobile-icon.svg" alt="" />
               <span>Mobile SIMs</span>
             </span>
-            <span class="accordion-state">Open</span>
+            <span class="accordion-state">Click to open</span>
           </button>
           <div class="accordion-panel" id="mobilePanel" role="region" aria-labelledby="mobileTrigger" hidden>
             <div class="form-section panel-inner">
@@ -258,11 +282,11 @@
 
         <section class="accordion-section" data-service-section="insurance">
           <button class="accordion-trigger" type="button" id="insuranceTrigger" aria-controls="insurancePanel" aria-expanded="false">
-            <span class="section-heading compact">
-              <span aria-hidden="true">5</span>
+            <span class="service-title">
+              <span class="service-icon-text small">i</span>
               <span>Insurance information</span>
             </span>
-            <span class="accordion-state">Open</span>
+            <span class="accordion-state">Click to open</span>
           </button>
           <div class="accordion-panel" id="insurancePanel" role="region" aria-labelledby="insuranceTrigger" hidden>
             <div class="form-section panel-inner">
@@ -286,7 +310,7 @@
 
         <section class="form-section" aria-labelledby="priority-heading">
           <div class="section-heading">
-            <span aria-hidden="true">6</span>
+            <span class="step-number" aria-hidden="true">2</span>
             <h2 id="priority-heading">What matters most?</h2>
           </div>
 
