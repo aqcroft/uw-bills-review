@@ -30,7 +30,7 @@
             <h1 id="page-title">Let's see where you're at now</h1>
             <p class="intro">
               Add a quick snapshot of your current household bills. Rough figures are fine,
-              and you can complete one section or a few. I will use this to prepare a helpful
+              and you can open one section at a time. I will use this to prepare a helpful
               comparison before we chat.
             </p>
             <ul class="reassurance-list" aria-label="What you need to know">
@@ -46,26 +46,26 @@
               <strong>Start with one bill or review a few</strong>
             </div>
             <p>
-              Choose the areas below that are useful today. You can stop after any section.
+              Choose a service below to open that section. Close it again whenever you like.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="service-strip" aria-label="Household services">
-        <button type="button" data-service-jump="energy">
+      <section class="service-strip" aria-label="Choose household services">
+        <button type="button" data-service-toggle="energy" aria-controls="energyPanel" aria-expanded="false">
           <img src="assets/energy-icon.svg" alt="" />
           <span>Energy</span>
         </button>
-        <button type="button" data-service-jump="broadband">
+        <button type="button" data-service-toggle="broadband" aria-controls="broadbandPanel" aria-expanded="false">
           <img src="assets/broadband-icon.svg" alt="" />
           <span>Broadband</span>
         </button>
-        <button type="button" data-service-jump="mobile">
+        <button type="button" data-service-toggle="mobile" aria-controls="mobilePanel" aria-expanded="false">
           <img src="assets/mobile-icon.svg" alt="" />
           <span>Mobile</span>
         </button>
-        <button type="button" data-service-jump="insurance">
+        <button type="button" data-service-toggle="insurance" aria-controls="insurancePanel" aria-expanded="false">
           <span class="service-icon-text">i</span>
           <span>Insurance info</span>
         </button>
@@ -117,169 +117,176 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="choose-heading">
-          <div class="section-heading">
-            <span aria-hidden="true">2</span>
-            <h2 id="choose-heading">What would you like reviewed?</h2>
-          </div>
+        <section class="accordion-section" data-service-section="energy">
+          <button class="accordion-trigger" type="button" id="energyTrigger" aria-controls="energyPanel" aria-expanded="false">
+            <span class="section-heading compact">
+              <span aria-hidden="true">2</span>
+              <span>Energy</span>
+            </span>
+            <span class="accordion-state">Open</span>
+          </button>
+          <div class="accordion-panel" id="energyPanel" role="region" aria-labelledby="energyTrigger" hidden>
+            <div class="form-section panel-inner">
+              <div class="field-grid">
+                <div>
+                  <label for="energyProvider">Current provider</label>
+                  <input id="energyProvider" name="energyProvider" />
+                </div>
+                <div>
+                  <label for="energyMonthlyCost">Approx monthly payment</label>
+                  <input id="energyMonthlyCost" name="energyMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;140" />
+                </div>
+              </div>
 
-          <div class="info-options">
-            <label class="info-option">
-              <input type="checkbox" name="reviewServices" value="energy" data-section-toggle="energySection" />
-              <span>
-                <strong>Energy</strong>
-                <small>Provider, rough monthly payment and tariff type if known</small>
-              </span>
-            </label>
-            <label class="info-option">
-              <input type="checkbox" name="reviewServices" value="broadband" data-section-toggle="broadbandSection" />
-              <span>
-                <strong>Broadband</strong>
-                <small>Provider, rough cost, speed and any issues</small>
-              </span>
-            </label>
-            <label class="info-option">
-              <input type="checkbox" name="reviewServices" value="mobile" data-section-toggle="mobileSection" />
-              <span>
-                <strong>Mobile SIMs</strong>
-                <small>Number of SIMs, provider and rough total monthly cost</small>
-              </span>
-            </label>
-            <label class="info-option">
-              <input type="checkbox" name="reviewServices" value="insurance" data-section-toggle="insuranceSection" />
-              <span>
-                <strong>Insurance information only</strong>
-                <small>Signposting only. No policy details or advice through this form.</small>
-              </span>
-            </label>
+              <div class="field-grid">
+                <div>
+                  <label for="energyAnnualUsage">Estimated annual usage, if known</label>
+                  <input id="energyAnnualUsage" name="energyAnnualUsage" placeholder="e.g. 2,900 kWh electricity / 12,000 kWh gas" />
+                  <p class="field-hint">Often shown on a bill as estimated annual consumption or usage in kWh.</p>
+                </div>
+                <div>
+                  <label for="energyContract">Contract or tariff name, if known</label>
+                  <input id="energyContract" name="energyContract" placeholder="Fixed, variable, tariff name, not sure" />
+                </div>
+              </div>
+
+              <fieldset>
+                <legend>What do you have?</legend>
+                <div class="choice-row three">
+                  <label><input type="radio" name="energyFuel" value="gas-electric" /> Gas & electric</label>
+                  <label><input type="radio" name="energyFuel" value="electric-only" /> Electric only</label>
+                  <label><input type="radio" name="energyFuel" value="not-sure" /> Not sure</label>
+                </div>
+              </fieldset>
+
+              <fieldset>
+                <legend>Anything else at home?</legend>
+                <div class="choice-row priorities">
+                  <label><input type="checkbox" name="energyFeatures" value="economy-7" /> Economy 7</label>
+                  <label><input type="checkbox" name="energyFeatures" value="ev-charging" /> EV charging</label>
+                  <label><input type="checkbox" name="energyFeatures" value="solar-panels" /> Solar panels</label>
+                  <label><input type="checkbox" name="energyFeatures" value="battery-storage" /> Battery storage</label>
+                </div>
+              </fieldset>
+
+              <label for="energyNotes">Anything else useful about your energy?</label>
+              <textarea id="energyNotes" name="energyNotes" rows="3" placeholder="Optional. For example, night usage, EV tariff, smart meter, or anything unusual."></textarea>
+            </div>
           </div>
         </section>
 
-        <section class="form-section service-section" id="energySection" data-service-section="energy" aria-labelledby="energy-heading" hidden>
-          <div class="section-heading">
-            <span aria-hidden="true">3</span>
-            <h2 id="energy-heading">Energy</h2>
+        <section class="accordion-section" data-service-section="broadband">
+          <button class="accordion-trigger" type="button" id="broadbandTrigger" aria-controls="broadbandPanel" aria-expanded="false">
+            <span class="section-heading compact">
+              <span aria-hidden="true">3</span>
+              <span>Broadband</span>
+            </span>
+            <span class="accordion-state">Open</span>
+          </button>
+          <div class="accordion-panel" id="broadbandPanel" role="region" aria-labelledby="broadbandTrigger" hidden>
+            <div class="form-section panel-inner">
+              <div class="field-grid">
+                <div>
+                  <label for="broadbandProvider">Current provider</label>
+                  <input id="broadbandProvider" name="broadbandProvider" />
+                </div>
+                <div>
+                  <label for="broadbandMonthlyCost">Approx monthly cost</label>
+                  <input id="broadbandMonthlyCost" name="broadbandMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;35" />
+                </div>
+              </div>
+
+              <div class="field-grid">
+                <div>
+                  <label for="broadbandSpeed">Speed, if known</label>
+                  <input id="broadbandSpeed" name="broadbandSpeed" placeholder="e.g. 67 Mbps or not sure" />
+                </div>
+                <div>
+                  <label for="broadbandBundle">Bundled with anything?</label>
+                  <input id="broadbandBundle" name="broadbandBundle" placeholder="TV, landline, mobile, not sure" />
+                </div>
+              </div>
+
+              <fieldset>
+                <legend>Do you use any Wi-Fi extras?</legend>
+                <div class="choice-row priorities">
+                  <label><input type="checkbox" name="broadbandExtras" value="boosters" /> Boosters / discs</label>
+                  <label><input type="checkbox" name="broadbandExtras" value="whole-home-wifi" /> Whole home Wi-Fi</label>
+                  <label><input type="checkbox" name="broadbandExtras" value="lots-of-devices" /> Lots of connected devices</label>
+                  <label><input type="checkbox" name="broadbandExtras" value="not-sure" /> Not sure</label>
+                </div>
+              </fieldset>
+
+              <label for="broadbandIssues">Anything you would like improved?</label>
+              <textarea id="broadbandIssues" name="broadbandIssues" rows="3" placeholder="Speed, Wi-Fi reach, reliability, price, gaming, streaming, working from home, or no issues"></textarea>
+            </div>
           </div>
-
-          <div class="field-grid">
-            <div>
-              <label for="energyProvider">Current provider</label>
-              <input id="energyProvider" name="energyProvider" />
-            </div>
-            <div>
-              <label for="energyMonthlyCost">Approx monthly payment</label>
-              <input id="energyMonthlyCost" name="energyMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;140" />
-            </div>
-          </div>
-
-          <fieldset>
-            <legend>What do you have?</legend>
-            <div class="choice-row three">
-              <label><input type="radio" name="energyFuel" value="gas-electric" /> Gas & electric</label>
-              <label><input type="radio" name="energyFuel" value="electric-only" /> Electric only</label>
-              <label><input type="radio" name="energyFuel" value="not-sure" /> Not sure</label>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Tariff type, if known</legend>
-            <div class="choice-row three">
-              <label><input type="radio" name="energyTariff" value="fixed" /> Fixed</label>
-              <label><input type="radio" name="energyTariff" value="variable" /> Variable</label>
-              <label><input type="radio" name="energyTariff" value="not-sure" /> Not sure</label>
-            </div>
-          </fieldset>
         </section>
 
-        <section class="form-section service-section" id="broadbandSection" data-service-section="broadband" aria-labelledby="broadband-heading" hidden>
-          <div class="section-heading">
-            <span aria-hidden="true">4</span>
-            <h2 id="broadband-heading">Broadband</h2>
-          </div>
+        <section class="accordion-section" data-service-section="mobile">
+          <button class="accordion-trigger" type="button" id="mobileTrigger" aria-controls="mobilePanel" aria-expanded="false">
+            <span class="section-heading compact">
+              <span aria-hidden="true">4</span>
+              <span>Mobile SIMs</span>
+            </span>
+            <span class="accordion-state">Open</span>
+          </button>
+          <div class="accordion-panel" id="mobilePanel" role="region" aria-labelledby="mobileTrigger" hidden>
+            <div class="form-section panel-inner">
+              <div class="field-grid">
+                <div>
+                  <label for="mobileSimCount">How many SIMs are in the household?</label>
+                  <input id="mobileSimCount" name="mobileSimCount" type="number" min="0" max="12" step="1" inputmode="numeric" />
+                </div>
+                <div>
+                  <label for="mobileMonthlyCost">Approx total monthly mobile cost</label>
+                  <input id="mobileMonthlyCost" name="mobileMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;48" />
+                </div>
+              </div>
 
-          <div class="field-grid">
-            <div>
-              <label for="broadbandProvider">Current provider</label>
-              <input id="broadbandProvider" name="broadbandProvider" />
-            </div>
-            <div>
-              <label for="broadbandMonthlyCost">Approx monthly cost</label>
-              <input id="broadbandMonthlyCost" name="broadbandMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;35" />
+              <p class="field-hint">
+                Add the number of SIMs and the individual SIM boxes will appear below.
+              </p>
+
+              <div class="sim-list" id="simList" aria-live="polite"></div>
+
+              <label for="mobileHouseholdNotes">Anything important across the household?</label>
+              <textarea id="mobileHouseholdNotes" name="mobileHouseholdNotes" rows="3" placeholder="Coverage issues, numbers to keep, roaming, parental controls, or anything else."></textarea>
             </div>
           </div>
-
-          <div class="field-grid">
-            <div>
-              <label for="broadbandSpeed">Speed, if known</label>
-              <input id="broadbandSpeed" name="broadbandSpeed" placeholder="e.g. 67 Mbps or not sure" />
-            </div>
-            <div>
-              <label for="broadbandBundle">Bundled with anything?</label>
-              <input id="broadbandBundle" name="broadbandBundle" placeholder="TV, landline, mobile, not sure" />
-            </div>
-          </div>
-
-          <label for="broadbandIssues">Anything you would like improved?</label>
-          <textarea id="broadbandIssues" name="broadbandIssues" rows="3" placeholder="Speed, Wi-Fi, reliability, price, or no issues"></textarea>
         </section>
 
-        <section class="form-section service-section" id="mobileSection" data-service-section="mobile" aria-labelledby="mobile-heading" hidden>
-          <div class="section-heading">
-            <span aria-hidden="true">5</span>
-            <h2 id="mobile-heading">Mobile SIMs</h2>
+        <section class="accordion-section" data-service-section="insurance">
+          <button class="accordion-trigger" type="button" id="insuranceTrigger" aria-controls="insurancePanel" aria-expanded="false">
+            <span class="section-heading compact">
+              <span aria-hidden="true">5</span>
+              <span>Insurance information</span>
+            </span>
+            <span class="accordion-state">Open</span>
+          </button>
+          <div class="accordion-panel" id="insurancePanel" role="region" aria-labelledby="insuranceTrigger" hidden>
+            <div class="form-section panel-inner">
+              <p class="regulated-note">
+                UW also offers insurance services. Because insurance is regulated, I cannot advise
+                on it or collect policy details through this form, but I can point you towards the
+                different insurance services Utility Warehouse provides.
+              </p>
+
+              <fieldset>
+                <legend>Would you like me to send general insurance information?</legend>
+                <div class="choice-row three">
+                  <label><input type="radio" name="insuranceInfo" value="yes" /> Yes</label>
+                  <label><input type="radio" name="insuranceInfo" value="no" /> No</label>
+                  <label><input type="radio" name="insuranceInfo" value="maybe-later" /> Maybe later</label>
+                </div>
+              </fieldset>
+            </div>
           </div>
-
-          <div class="field-grid">
-            <div>
-              <label for="mobileProvider">Current provider</label>
-              <input id="mobileProvider" name="mobileProvider" />
-            </div>
-            <div>
-              <label for="mobileSimCount">Number of SIMs</label>
-              <input id="mobileSimCount" name="mobileSimCount" type="number" min="0" step="1" inputmode="numeric" />
-            </div>
-          </div>
-
-          <div class="field-grid">
-            <div>
-              <label for="mobileMonthlyCost">Approx total monthly cost</label>
-              <input id="mobileMonthlyCost" name="mobileMonthlyCost" inputmode="decimal" placeholder="e.g. &pound;48" />
-            </div>
-            <div>
-              <label for="mobileContract">Contract situation</label>
-              <input id="mobileContract" name="mobileContract" placeholder="In contract, rolling, not sure" />
-            </div>
-          </div>
-
-          <label for="mobileMustHaves">Anything important to keep?</label>
-          <textarea id="mobileMustHaves" name="mobileMustHaves" rows="3" placeholder="Numbers, unlimited data, roaming, coverage, 5G"></textarea>
-        </section>
-
-        <section class="form-section service-section" id="insuranceSection" data-service-section="insurance" aria-labelledby="insurance-heading" hidden>
-          <div class="section-heading">
-            <span aria-hidden="true">6</span>
-            <h2 id="insurance-heading">Insurance signposting</h2>
-          </div>
-
-          <p class="regulated-note">
-            Insurance is regulated, so this form does not collect policy details and I cannot
-            provide insurance advice through it. If useful, I can point you towards general
-            information separately.
-          </p>
-
-          <fieldset>
-            <legend>Would you like general insurance information?</legend>
-            <div class="choice-row three">
-              <label><input type="radio" name="insuranceInfo" value="yes" /> Yes</label>
-              <label><input type="radio" name="insuranceInfo" value="no" /> No</label>
-              <label><input type="radio" name="insuranceInfo" value="maybe-later" /> Maybe later</label>
-            </div>
-          </fieldset>
         </section>
 
         <section class="form-section" aria-labelledby="priority-heading">
           <div class="section-heading">
-            <span aria-hidden="true">7</span>
+            <span aria-hidden="true">6</span>
             <h2 id="priority-heading">What matters most?</h2>
           </div>
 
@@ -320,6 +327,49 @@
         </section>
       </div>
     </main>
+
+    <template id="simTemplate">
+      <details class="sim-card" open>
+        <summary>SIM <span data-sim-number></span></summary>
+        <div class="field-grid">
+          <div>
+            <label>Provider</label>
+            <input data-sim-field="provider" />
+          </div>
+          <div>
+            <label>Monthly cost</label>
+            <input data-sim-field="monthlyCost" inputmode="decimal" placeholder="e.g. &pound;12" />
+          </div>
+        </div>
+        <div class="field-grid">
+          <div>
+            <label>SIM only or handset?</label>
+            <select data-sim-field="planType">
+              <option value="">Not sure / choose</option>
+              <option value="sim-only">SIM only</option>
+              <option value="handset">Handset included</option>
+              <option value="both">Mixed / not sure</option>
+            </select>
+          </div>
+          <div>
+            <label>Contract time left</label>
+            <input data-sim-field="contractLeft" placeholder="e.g. 3 months, rolling, not sure" />
+          </div>
+        </div>
+        <div class="field-grid">
+          <div>
+            <label>Data allowance</label>
+            <input data-sim-field="dataAllowance" placeholder="e.g. 20GB, unlimited, not sure" />
+          </div>
+          <div>
+            <label>Roaming / extras</label>
+            <input data-sim-field="extras" placeholder="EU roaming, 5G, hotspot, not sure" />
+          </div>
+        </div>
+        <label>Notes for this SIM</label>
+        <textarea data-sim-field="notes" rows="2" placeholder="Coverage, number to keep, who uses it, or anything specific"></textarea>
+      </details>
+    </template>
 
     <script src="script.js"></script>
   </body>

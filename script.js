@@ -7,8 +7,11 @@ const formMessage = document.querySelector("#formMessage");
 const submitButton = document.querySelector("#submitButton");
 const successPanel = document.querySelector("#successPanel");
 const closeSuccess = document.querySelector("#closeSuccess");
-const sectionToggles = document.querySelectorAll("[data-section-toggle]");
-const serviceJumpButtons = document.querySelectorAll("[data-service-jump]");
+const serviceButtons = document.querySelectorAll("[data-service-toggle]");
+const accordionSections = document.querySelectorAll("[data-service-section]");
+const mobileSimCount = document.querySelector("#mobileSimCount");
+const simList = document.querySelector("#simList");
+const simTemplate = document.querySelector("#simTemplate");
 
 function showMessage(message) {
   formMessage.textContent = message;
@@ -36,31 +39,91 @@ function getField(formData, fieldName) {
   return String(formData.get(fieldName) || "").trim();
 }
 
-function syncServiceSections() {
-  sectionToggles.forEach((toggle) => {
-    const section = document.querySelector(`#${toggle.dataset.sectionToggle}`);
-    if (section) {
-      section.hidden = !toggle.checked;
-    }
-  });
+function getPanelForService(serviceName) {
+  return document.querySelector(`[data-service-section="${serviceName}"] .accordion-panel`);
 }
 
-function selectService(serviceName) {
-  const toggle = document.querySelector(`[name="reviewServices"][value="${serviceName}"]`);
-  const section = document.querySelector(`[data-service-section="${serviceName}"]`);
+function getTriggerForService(serviceName) {
+  return document.querySelector(`[data-service-section="${serviceName}"] .accordion-trigger`);
+}
 
-  if (toggle) {
-    toggle.checked = true;
-    syncServiceSections();
+function setAccordionState(serviceName, shouldOpen, shouldScroll = false) {
+  const panel = getPanelForService(serviceName);
+  const trigger = getTriggerForService(serviceName);
+  const topButton = document.querySelector(`[data-service-toggle="${serviceName}"]`);
+
+  if (!panel || !trigger) {
+    return;
   }
 
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  panel.hidden = !shouldOpen;
+  trigger.setAttribute("aria-expanded", String(shouldOpen));
+  trigger.querySelector(".accordion-state").textContent = shouldOpen ? "Close" : "Open";
+
+  if (topButton) {
+    topButton.classList.toggle("is-selected", shouldOpen);
+    topButton.setAttribute("aria-expanded", String(shouldOpen));
   }
+
+  if (shouldOpen && shouldScroll) {
+    trigger.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function toggleAccordion(serviceName, shouldScroll = false) {
+  const panel = getPanelForService(serviceName);
+  setAccordionState(serviceName, panel ? panel.hidden : true, shouldScroll);
+}
+
+function getOpenServices() {
+  return Array.from(accordionSections)
+    .filter((section) => !section.querySelector(".accordion-panel").hidden)
+    .map((section) => section.dataset.serviceSection)
+    .join(", ");
+}
+
+function buildSimRows() {
+  const count = Math.min(Math.max(Number.parseInt(mobileSimCount.value || "0", 10) || 0, 0), 12);
+  const existing = collectSimDetails();
+
+  simList.innerHTML = "";
+
+  for (let index = 0; index < count; index += 1) {
+    const clone = simTemplate.content.cloneNode(true);
+    const card = clone.querySelector(".sim-card");
+    const simNumber = index + 1;
+
+    card.dataset.simIndex = String(index);
+    clone.querySelector("[data-sim-number]").textContent = String(simNumber);
+    clone.querySelectorAll("[data-sim-field]").forEach((field) => {
+      const fieldName = field.dataset.simField;
+      field.name = `sim${simNumber}_${fieldName}`;
+      field.id = `sim${simNumber}_${fieldName}`;
+
+      if (existing[index] && existing[index][fieldName]) {
+        field.value = existing[index][fieldName];
+      }
+    });
+
+    simList.appendChild(clone);
+  }
+}
+
+function collectSimDetails() {
+  return Array.from(simList.querySelectorAll(".sim-card")).map((card, index) => {
+    const details = { simNumber: index + 1 };
+
+    card.querySelectorAll("[data-sim-field]").forEach((field) => {
+      details[field.dataset.simField] = field.value.trim();
+    });
+
+    return details;
+  });
 }
 
 function buildPayload() {
   const formData = new FormData(form);
+  const mobileSims = collectSimDetails();
 
   return {
     submittedAt: new Date().toISOString(),
@@ -69,21 +132,24 @@ function buildPayload() {
     contactPreference: getRadioValue(formData, "contactPreference"),
     phone: getField(formData, "phone"),
     email: getField(formData, "email"),
-    reviewServices: getSelectedValues(formData, "reviewServices"),
+    reviewServices: getOpenServices(),
     energyProvider: getField(formData, "energyProvider"),
     energyMonthlyCost: getField(formData, "energyMonthlyCost"),
+    energyAnnualUsage: getField(formData, "energyAnnualUsage"),
+    energyContract: getField(formData, "energyContract"),
     energyFuel: getRadioValue(formData, "energyFuel"),
-    energyTariff: getRadioValue(formData, "energyTariff"),
+    energyFeatures: getSelectedValues(formData, "energyFeatures"),
+    energyNotes: getField(formData, "energyNotes"),
     broadbandProvider: getField(formData, "broadbandProvider"),
     broadbandMonthlyCost: getField(formData, "broadbandMonthlyCost"),
     broadbandSpeed: getField(formData, "broadbandSpeed"),
     broadbandBundle: getField(formData, "broadbandBundle"),
+    broadbandExtras: getSelectedValues(formData, "broadbandExtras"),
     broadbandIssues: getField(formData, "broadbandIssues"),
-    mobileProvider: getField(formData, "mobileProvider"),
     mobileSimCount: getField(formData, "mobileSimCount"),
     mobileMonthlyCost: getField(formData, "mobileMonthlyCost"),
-    mobileContract: getField(formData, "mobileContract"),
-    mobileMustHaves: getField(formData, "mobileMustHaves"),
+    mobileHouseholdNotes: getField(formData, "mobileHouseholdNotes"),
+    mobileSimsJson: JSON.stringify(mobileSims),
     insuranceInfo: getRadioValue(formData, "insuranceInfo"),
     mainPriority: getRadioValue(formData, "mainPriority"),
     notes: getField(formData, "notes"),
@@ -114,7 +180,7 @@ function validatePayload(payload) {
   }
 
   if (!payload.reviewServices) {
-    return "Please choose at least one bill to review.";
+    return "Please open at least one bill section using the buttons near the top.";
   }
 
   return "";
@@ -135,15 +201,20 @@ async function submitReview(payload) {
   });
 }
 
-sectionToggles.forEach((toggle) => {
-  toggle.addEventListener("change", syncServiceSections);
-});
-
-serviceJumpButtons.forEach((button) => {
+serviceButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    selectService(button.dataset.serviceJump);
+    toggleAccordion(button.dataset.serviceToggle, true);
   });
 });
+
+accordionSections.forEach((section) => {
+  const trigger = section.querySelector(".accordion-trigger");
+  trigger.addEventListener("click", () => {
+    toggleAccordion(section.dataset.serviceSection);
+  });
+});
+
+mobileSimCount.addEventListener("input", buildSimRows);
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -164,7 +235,8 @@ form.addEventListener("submit", async (event) => {
     await submitReview(payload);
     successPanel.hidden = false;
     form.reset();
-    syncServiceSections();
+    simList.innerHTML = "";
+    accordionSections.forEach((section) => setAccordionState(section.dataset.serviceSection, false));
   } catch (error) {
     showMessage(error.message || "Something went wrong. Please try again.");
   } finally {
@@ -176,5 +248,3 @@ form.addEventListener("submit", async (event) => {
 closeSuccess.addEventListener("click", () => {
   successPanel.hidden = true;
 });
-
-syncServiceSections();

@@ -27,6 +27,7 @@ body {
 
 button,
 input,
+select,
 textarea {
   font: inherit;
 }
@@ -38,7 +39,8 @@ textarea {
 }
 
 .hero,
-.form-section {
+.form-section,
+.accordion-section {
   border: 2px solid var(--line);
   border-radius: 8px;
   background: var(--card);
@@ -213,8 +215,14 @@ h2 {
   cursor: pointer;
 }
 
-.service-strip button:hover {
+.service-strip button:hover,
+.service-strip button.is-selected {
   transform: translateY(-1px);
+}
+
+.service-strip button.is-selected {
+  background: #fbf7ff;
+  box-shadow: 4px 4px 0 var(--purple);
 }
 
 .service-strip img,
@@ -237,6 +245,55 @@ h2 {
   gap: 16px;
 }
 
+.accordion-section {
+  overflow: hidden;
+}
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  min-height: 68px;
+  border: 0;
+  border-radius: 0;
+  padding: 14px 18px;
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-trigger:hover {
+  background: #fbf7ff;
+}
+
+.accordion-state {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  min-height: 34px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 0 12px;
+  background: var(--purple);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.accordion-panel {
+  border-top: 2px solid var(--line);
+  background: #fff;
+}
+
+.panel-inner {
+  border: 0;
+  border-radius: 0;
+}
+
 .honeypot {
   position: absolute;
   left: -10000px;
@@ -254,6 +311,12 @@ h2 {
   align-items: center;
   gap: 10px;
   margin-bottom: 14px;
+}
+
+.section-heading.compact {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 900;
 }
 
 .section-heading > span {
@@ -292,6 +355,13 @@ legend {
   font-weight: 700;
 }
 
+.field-hint {
+  margin: -8px 0 14px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
 fieldset {
   margin: 0 0 14px;
   padding: 0;
@@ -299,6 +369,7 @@ fieldset {
 }
 
 input,
+select,
 textarea {
   width: 100%;
   min-height: 46px;
@@ -314,6 +385,7 @@ textarea {
 }
 
 input:focus,
+select:focus,
 textarea:focus,
 button:focus,
 a:focus {
@@ -397,6 +469,33 @@ a:focus {
   border-left: 6px solid var(--purple);
   padding: 12px 14px;
   background: #fbf7ff;
+}
+
+.sim-list {
+  display: grid;
+  gap: 12px;
+  margin: 8px 0 16px;
+}
+
+.sim-card {
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0;
+}
+
+.sim-card summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-weight: 900;
+}
+
+.sim-card .field-grid,
+.sim-card > label,
+.sim-card > textarea {
+  width: calc(100% - 28px);
+  margin-left: 14px;
+  margin-right: 14px;
 }
 
 .form-message {
