@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Free household bills review for energy, broadband, mobile and insurance signposting with Adrian Croft, Authorised UW Partner."
+    />
+    <title>Free Bills Review</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="brand-row">
+          <img src="assets/uw-logo-purple.svg" alt="Utility Warehouse" class="uw-logo" />
+          <div class="partner-card">
+            <div>
+              <strong>Adrian Croft</strong>
+              <span>Authorised UW Partner</span>
+            </div>
+            <img src="assets/adrian-croft.jpg" alt="Adrian Croft" />
+          </div>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">Free household bills review</p>
+            <h1 id="page-title">Let's see where you're at now</h1>
+            <p class="intro">
+              Add a quick snapshot of your current household bills. Rough figures are fine,
+              and you can complete one section or a few. I will use this to prepare a helpful
+              comparison before we chat.
+            </p>
+            <ul class="reassurance-list" aria-label="What you need to know">
+              <li>No bank details</li>
+              <li>No account numbers</li>
+              <li>Estimates are fine</li>
+            </ul>
+          </div>
+
+          <div class="review-card" aria-label="Review options">
+            <div class="review-card-header">
+              <span aria-hidden="true">£</span>
+              <strong>Start with one bill or review a few</strong>
+            </div>
+            <p>
+              Choose the areas below that are useful today. You can stop after any section.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-strip" aria-label="Household services">
+        <button type="button" data-service-jump="energy">
+          <img src="assets/energy-icon.svg" alt="" />
+          <span>Energy</span>
+        </button>
+        <button type="button" data-service-jump="broadband">
+          <img src="assets/broadband-icon.svg" alt="" />
+          <span>Broadband</span>
+        </button>
+        <button type="button" data-service-jump="mobile">
+          <img src="assets/mobile-icon.svg" alt="" />
+          <span>Mobile</span>
+        </button>
+        <button type="button" data-service-jump="insurance">
+          <span class="service-icon-text">i</span>
+          <span>Insurance info</span>
+        </button>
+      </section>
+
+      <form class="review-form" id="reviewForm" autocomplete="on" novalidate>
+        <label class="honeypot" for="website">Website</label>
+        <input class="honeypot" id="website" name="website" tabindex="-1" autocomplete="off" />
+
+        <section class="form-section" aria-labelledby="contact-heading">
+          <div class="section-heading">
+            <span aria-hidden="true">1</span>
+            <h2 id="contact-heading">Your details</h2>
+          </div>
+
+          <p class="section-intro">
+            Just enough so I can match your answers together and come back to you.
+          </p>
+
+          <div class="field-grid">
+            <div>
+              <label for="firstName">First name <span class="required-mark">*</span></label>
+              <input id="firstName" required name="firstName" autocomplete="given-name" />
+            </div>
+            <div>
+              <label for="postcode">Postcode</label>
+              <input id="postcode" name="postcode" autocomplete="postal-code" />
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>Best way to contact you <span class="required-mark">*</span></legend>
+            <div class="choice-row three">
+              <label><input type="radio" name="contactPreference" value="phone" required /> Phone</label>
+              <label><input type="radio" name="contactPreference" value="email" required /> Email</label>
+              <label><input type="radio" name="contactPreference" value="whatsapp" required /> WhatsApp</label>
+            </div>
+          </fieldset>
+
+          <div class="field-grid">
+            <div>
+              <label for="phone">Phone / WhatsApp</label>
+              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" />
+            </div>
+            <div>
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" />
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="choose-heading">
+          <div class="section-heading">
+            <span aria-hidden="true">2</span>
+            <h2 id="choose-heading">What would you like reviewed?</h2>
+          </div>
+
+          <div class="info-options">
+            <label class="info-option">
+              <input type="checkbox" name="reviewServices" value="energy" data-section-toggle="energySection" />
+              <span>
+                <strong>Energy</strong>
+                <small>Provider, rough monthly payment and tariff type if known</small>
+              </span>
+            </label>
+            <label class="info-option">
+              <input type="checkbox" name="reviewServices" value="broadband" data-section-toggle="broadbandSection" />
+              <span>
+                <strong>Broadband</strong>
+                <small>Provider, rough cost, speed and any issues</small>
+              </span>
+            </label>
+            <label class="info-option">
+              <input type="checkbox" name="reviewServices" value="mobile" data-section-toggle="mobileSection" />
+              <span>
+                <strong>Mobile SIMs</strong>
+                <small>Number of SIMs, provider and rough total monthly cost</small>
+              </span>
+            </label>
+            <label class="info-option">
+              <input type="checkbox" name="reviewServices" value="insurance" data-section-toggle="insuranceSection" />
+              <span>
+                <strong>Insurance information only</strong>
+                <small>Signposting only. No policy details or advice through this form.</small>
+              </span>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section service-section" id="energySection" data-service-section="energy" aria-labelledby="energy-heading" hidden>
+          <div class="section-heading">
+            <span aria-hidden="true">3</span>
+            <h2 id="energy-heading">Energy</h2>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="energyProvider">Current provider</label>
+              <input id="energyProvider" name="energyProvider" />
+            </div>
+            <div>
+              <label for="energyMonthlyCost">Approx monthly payment</label>
+              <input id="energyMonthlyCost" name="energyMonthlyCost" inputmode="decimal" placeholder="e.g. £140" />
+            </div>
+          </div>
+
+          <fieldset>
+            <legend>What do you have?</legend>
+            <div class="choice-row three">
+              <label><input type="radio" name="energyFuel" value="gas-electric" /> Gas & electric</label>
+              <label><input type="radio" name="energyFuel" value="electric-only" /> Electric only</label>
+              <label><input type="radio" name="energyFuel" value="not-sure" /> Not sure</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tariff type, if known</legend>
+            <div class="choice-row three">
+              <label><input type="radio" name="energyTariff" value="fixed" /> Fixed</label>
+              <label><input type="radio" name="energyTariff" value="variable" /> Variable</label>
+              <label><input type="radio" name="energyTariff" value="not-sure" /> Not sure</label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section service-section" id="broadbandSection" data-service-section="broadband" aria-labelledby="broadband-heading" hidden>
+          <div class="section-heading">
+            <span aria-hidden="true">4</span>
+            <h2 id="broadband-heading">Broadband</h2>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="broadbandProvider">Current provider</label>
+              <input id="broadbandProvider" name="broadbandProvider" />
+            </div>
+            <div>
+              <label for="broadbandMonthlyCost">Approx monthly cost</label>
+              <input id="broadbandMonthlyCost" name="broadbandMonthlyCost" inputmode="decimal" placeholder="e.g. £35" />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="broadbandSpeed">Speed, if known</label>
+              <input id="broadbandSpeed" name="broadbandSpeed" placeholder="e.g. 67 Mbps or not sure" />
+            </div>
+            <div>
+              <label for="broadbandBundle">Bundled with anything?</label>
+              <input id="broadbandBundle" name="broadbandBundle" placeholder="TV, landline, mobile, not sure" />
+            </div>
+          </div>
+
+          <label for="broadbandIssues">Anything you would like improved?</label>
+          <textarea id="broadbandIssues" name="broadbandIssues" rows="3" placeholder="Speed, Wi-Fi, reliability, price, or no issues"></textarea>
+        </section>
+
+        <section class="form-section service-section" id="mobileSection" data-service-section="mobile" aria-labelledby="mobile-heading" hidden>
+          <div class="section-heading">
+            <span aria-hidden="true">5</span>
+            <h2 id="mobile-heading">Mobile SIMs</h2>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="mobileProvider">Current provider</label>
+              <input id="mobileProvider" name="mobileProvider" />
+            </div>
+            <div>
+              <label for="mobileSimCount">Number of SIMs</label>
+              <input id="mobileSimCount" name="mobileSimCount" type="number" min="0" step="1" inputmode="numeric" />
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="mobileMonthlyCost">Approx total monthly cost</label>
+              <input id="mobileMonthlyCost" name="mobileMonthlyCost" inputmode="decimal" placeholder="e.g. £48" />
+            </div>
+            <div>
+              <label for="mobileContract">Contract situation</label>
+              <input id="mobileContract" name="mobileContract" placeholder="In contract, rolling, not sure" />
+            </div>
+          </div>
+
+          <label for="mobileMustHaves">Anything important to keep?</label>
+          <textarea id="mobileMustHaves" name="mobileMustHaves" rows="3" placeholder="Numbers, unlimited data, roaming, coverage, 5G"></textarea>
+        </section>
+
+        <section class="form-section service-section" id="insuranceSection" data-service-section="insurance" aria-labelledby="insurance-heading" hidden>
+          <div class="section-heading">
+            <span aria-hidden="true">6</span>
+            <h2 id="insurance-heading">Insurance signposting</h2>
+          </div>
+
+          <p class="regulated-note">
+            Insurance is regulated, so this form does not collect policy details and I cannot
+            provide insurance advice through it. If useful, I can point you towards general
+            information separately.
+          </p>
+
+          <fieldset>
+            <legend>Would you like general insurance information?</legend>
+            <div class="choice-row three">
+              <label><input type="radio" name="insuranceInfo" value="yes" /> Yes</label>
+              <label><input type="radio" name="insuranceInfo" value="no" /> No</label>
+              <label><input type="radio" name="insuranceInfo" value="maybe-later" /> Maybe later</label>
+            </div>
+          </fieldset>
+        </section>
+
+        <section class="form-section" aria-labelledby="priority-heading">
+          <div class="section-heading">
+            <span aria-hidden="true">7</span>
+            <h2 id="priority-heading">What matters most?</h2>
+          </div>
+
+          <fieldset>
+            <legend>Choose the closest fit</legend>
+            <div class="choice-row priorities">
+              <label><input type="radio" name="mainPriority" value="lower-cost" /> Lower monthly cost</label>
+              <label><input type="radio" name="mainPriority" value="simpler-bills" /> Simpler bills</label>
+              <label><input type="radio" name="mainPriority" value="better-service" /> Better service</label>
+              <label><input type="radio" name="mainPriority" value="not-sure" /> Not sure, just review it</label>
+            </div>
+          </fieldset>
+
+          <label for="notes">Anything else useful?</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Optional. Add anything that would help me understand the current situation."></textarea>
+
+          <p class="consent-note">
+            By submitting this form, you agree that I can use the information provided to prepare
+            your free bills review and contact you about it.
+          </p>
+          <p class="required-note"><span class="required-mark">*</span> Required field</p>
+        </section>
+
+        <p class="form-message" id="formMessage" role="alert" hidden></p>
+
+        <button class="submit-button" id="submitButton" type="submit">Send bills snapshot</button>
+      </form>
+
+      <div class="success-modal" id="successPanel" hidden>
+        <section class="success-panel" role="dialog" aria-modal="true" aria-labelledby="success-title">
+          <p class="eyebrow">Snapshot received</p>
+          <h2 id="success-title">Thanks, I have enough to take a look</h2>
+          <p>
+            I will review what you have shared and come back to you personally. If you only
+            completed one section, that is absolutely fine.
+          </p>
+          <button class="close-button" type="button" id="closeSuccess">Close</button>
+        </section>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
