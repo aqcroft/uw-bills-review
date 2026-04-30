@@ -17,7 +17,6 @@ const HEADERS = [
   'economy7DayUsage',
   'economy7NightUsage',
   'energyFuel',
-  'energyFeatures',
   'energyNotes',
   'broadbandProvider',
   'broadbandMonthlyCost',

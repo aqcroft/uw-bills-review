@@ -144,7 +144,6 @@ function buildPayload() {
     economy7DayUsage: getField(formData, "economy7DayUsage"),
     economy7NightUsage: getField(formData, "economy7NightUsage"),
     energyFuel: getRadioValue(formData, "energyFuel"),
-    energyFeatures: getSelectedValues(formData, "energyFeatures"),
     energyNotes: getField(formData, "energyNotes"),
     broadbandProvider: getField(formData, "broadbandProvider"),
     broadbandMonthlyCost: getField(formData, "broadbandMonthlyCost"),
